@@ -18,11 +18,12 @@ class HttpServer implements MessageComponentInterface {
     protected $_httpServer;
 
     /**
-     * @param HttpServerInterface
+     * @param HttpServerInterface $component
+     * @param int $maxBufferSize
      */
-    public function __construct(HttpServerInterface $component) {
+    public function __construct(HttpServerInterface $component, $maxBufferSize = 4096) {
         $this->_httpServer = $component;
-        $this->_reqParser  = new HttpRequestParser;
+        $this->_reqParser  = new HttpRequestParser($maxBufferSize);
     }
 
     /**
